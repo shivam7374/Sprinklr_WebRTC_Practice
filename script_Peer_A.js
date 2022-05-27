@@ -22,9 +22,10 @@ localConnection.onicecandidate = (e) => {
 };
 
 const sendChannel = localConnection.createDataChannel("sendChannel");
-sendChannel.onmessage = (e) => console.log("messsage received!!!" + e.data);
+sendChannel.onmessage = (e) =>
+  console.log("Message Recieved From Device B : " + e.data);
 sendChannel.onopen = (e) => {
-  console.log("open!!!!");
+  console.log("Communication Established Now you can Chat !!!");
   document.querySelector(".send_response").disabled = false;
 };
 sendChannel.onclose = (e) => console.log("closed!!!!!!");
@@ -35,14 +36,17 @@ localConnection
 
 document.querySelector(".accept_answer").addEventListener("click", async () => {
   const answer = JSON.parse(document.getElementById("remote_address").value);
-  localConnection.setRemoteDescription(answer).then((a) => console.log("done"));
+  localConnection.setRemoteDescription(answer).then((a) => {
+    // console.log("done");
+  });
   // console.log("bro hogya");
 });
 
 document.querySelector(".send_response").addEventListener("click", async () => {
   const response = document.getElementById("chat_text").value;
   const text = document.createElement("div");
-  text.innerHTML = document.getElementById("chat_text").value;
+  text.innerHTML =
+    "Message Sent By You : " + document.getElementById("chat_text").value;
   document.querySelector(".chat").appendChild(text);
   sendChannel.send(response);
 });

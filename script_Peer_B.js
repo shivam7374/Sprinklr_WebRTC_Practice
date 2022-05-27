@@ -29,9 +29,9 @@ document.querySelector(".offer_entered").addEventListener("click", async () => {
   remoteConnection.ondatachannel = (e) => {
     receiveChannel = e.channel;
     receiveChannel.onmessage = (e) =>
-      console.log("messsage received!!! " + e.data);
+      console.log("Message Recieved From Device A : " + e.data);
     receiveChannel.onopen = (e) => {
-      console.log("open!!!!");
+      console.log("Communication Established Now you can Chat !!!");
       document.querySelector(".send_response").disabled = false;
     };
     receiveChannel.onclose = (e) => {
@@ -55,7 +55,8 @@ document.querySelector(".offer_entered").addEventListener("click", async () => {
 document.querySelector(".send_response").addEventListener("click", async () => {
   const response = document.getElementById("chat_text").value;
   const text = document.createElement("div");
-  text.innerHTML = document.getElementById("chat_text").value;
+  text.innerHTML =
+    "Message Sent By You : " + document.getElementById("chat_text").value;
   document.querySelector(".chat").appendChild(text);
   remoteConnection.channel.send(response);
 });
