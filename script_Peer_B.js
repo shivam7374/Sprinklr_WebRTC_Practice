@@ -11,6 +11,7 @@
     }
   };
 })();
+document.querySelector(".send_response").disabled = true;
 
 var remoteConnection;
 document.querySelector(".offer_entered").addEventListener("click", async () => {
@@ -31,6 +32,7 @@ document.querySelector(".offer_entered").addEventListener("click", async () => {
       console.log("messsage received!!! " + e.data);
     receiveChannel.onopen = (e) => {
       console.log("open!!!!");
+      document.querySelector(".send_response").disabled = false;
     };
     receiveChannel.onclose = (e) => {
       console.log("closed!!!!!!");

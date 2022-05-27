@@ -11,7 +11,7 @@
     }
   };
 })();
-
+document.querySelector(".send_response").disabled = true;
 const localConnection = new RTCPeerConnection();
 
 localConnection.onicecandidate = (e) => {
@@ -23,7 +23,10 @@ localConnection.onicecandidate = (e) => {
 
 const sendChannel = localConnection.createDataChannel("sendChannel");
 sendChannel.onmessage = (e) => console.log("messsage received!!!" + e.data);
-sendChannel.onopen = (e) => console.log("open!!!!");
+sendChannel.onopen = (e) => {
+  console.log("open!!!!");
+  document.querySelector(".send_response").disabled = false;
+};
 sendChannel.onclose = (e) => console.log("closed!!!!!!");
 
 localConnection
