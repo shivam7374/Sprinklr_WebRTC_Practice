@@ -21,3 +21,11 @@ document.querySelector(".accept_answer").addEventListener("click", async () => {
   localConnection.setRemoteDescription(answer).then((a) => console.log("done"));
   console.log("bro hogya");
 });
+
+document.querySelector(".send_response").addEventListener("click", async () => {
+  const response = document.getElementById("chat_text").value;
+  const text = document.createElement("div");
+  text.innerText = document.getElementById("chat_text").value;
+  document.querySelector(".chat").appendChild(text);
+  sendChannel.send(response);
+});

@@ -30,3 +30,11 @@ document.querySelector(".offer_entered").addEventListener("click", async () => {
     });
   //send the anser to the client
 });
+
+document.querySelector(".send_response").addEventListener("click", async () => {
+  const response = document.getElementById("chat_text").value;
+  const text = document.createElement("div");
+  text.innerText = document.getElementById("chat_text").value;
+  document.querySelector(".chat").appendChild(text);
+  sendChannel.send(response);
+});
