@@ -1,8 +1,22 @@
+// This function prints everything that is to be console logged.
+(function () {
+  var old = console.log;
+  var logger = document.querySelector(".chat");
+  console.log = function (message) {
+    if (typeof message == "object") {
+      logger.innerHTML +=
+        (JSON && JSON.stringify ? JSON.stringify(message) : message) + "<br />";
+    } else {
+      logger.innerHTML += message + "<br />";
+    }
+  };
+})();
+
 const localConnection = new RTCPeerConnection();
 
 localConnection.onicecandidate = (e) => {
-  console.log(" NEW ice candidnat!! on localconnection reprinting SDP ");
-  console.log(JSON.stringify(localConnection.localDescription));
+  // console.log(" NEW ice candidnat!! on localconnection reprinting SDP ");
+  // console.log(JSON.stringify(localConnection.localDescription));
   const local_address = document.getElementById("local_address");
   local_address.value = JSON.stringify(localConnection.localDescription);
 };
@@ -19,13 +33,13 @@ localConnection
 document.querySelector(".accept_answer").addEventListener("click", async () => {
   const answer = JSON.parse(document.getElementById("remote_address").value);
   localConnection.setRemoteDescription(answer).then((a) => console.log("done"));
-  console.log("bro hogya");
+  // console.log("bro hogya");
 });
 
 document.querySelector(".send_response").addEventListener("click", async () => {
   const response = document.getElementById("chat_text").value;
   const text = document.createElement("div");
-  text.innerText = document.getElementById("chat_text").value;
+  text.innerHTML = document.getElementById("chat_text").value;
   document.querySelector(".chat").appendChild(text);
   sendChannel.send(response);
 });
